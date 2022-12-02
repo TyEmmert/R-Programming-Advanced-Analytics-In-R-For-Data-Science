@@ -1,6 +1,4 @@
 getwd()
-setwd("C:\\Users\\Emmert\\Documents\\Test2")
-getwd()
 util <- read.csv("Machine-Utilization.csv")
 util
 head(util)
@@ -23,7 +21,6 @@ util$Timestamp <- NULL
 head(util,12)
 util <- util[,c(4,1,2,3)]
 head(util,12)
-view(util)
 RL1 <- util[util$Machine == "RL1",]
 summary(RL1)
 RL1$Machine <- factor(RL1$Machine)
@@ -31,8 +28,8 @@ summary(RL1)
 RL1$Machine <- factor(RL1$Machine) #This refactors the data so that the other machines are removed
 summary(RL1)
 util_stats_rl1 <- c(min(RL1$utilization, na.rm=T),
-mean(RL1$utilization, na.rm=T),
-max(RL1$utilization, na.rm=T)
+                    mean(RL1$utilization, na.rm=T),
+                    max(RL1$utilization, na.rm=T)
 )
 util_stats_rl1
 RL1$utilization < 0.90
@@ -105,7 +102,6 @@ subset_rl1[[2]][2]
 subset_rl1$Stats[2]
 #Double square brackets are NOT for subsetting:
 list_rl1
-list_rl1[[1:3]]
 list_rl1[1:2]
 list_rl1[1:3]
 
@@ -121,10 +117,9 @@ summary(list_rl1) #you can see the class is saved as gg
 list_rl1
 
 p + geom_line(aes(x=PosixTime, y = utilization, #utilization with respect to time
-color = Machine), #color each machine a diff color
-size =1.2) + #sets the size of the line; make sure its out of aes
-facet_grid(Machine~.) + #separate plot into machines; what does ~. do?
-geom_hline(yintercept= 0.9, #adds a horizontal line at 0.9
-col = "Gray", size = 1.2, #color the hoizontal line gray and size 1.2
-linetype=3) #makes the line a dashed line
-
+                  color = Machine), #color each machine a diff color
+              size =1.2) + #sets the size of the line; make sure its out of aes
+  facet_grid(Machine~.) + #separate plot into machines; what does ~. do?
+  geom_hline(yintercept= 0.9, #adds a horizontal line at 0.9
+             col = "Gray", size = 1.2, #color the hoizontal line gray and size 1.2
+             linetype=3) #makes the line a dashed line
